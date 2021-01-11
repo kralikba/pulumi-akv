@@ -64,6 +64,15 @@ class AzMysqlDemo : Stack
             }
         });
 
+        new FirewallRule("mysqlfw-open", new FirewallRuleArgs()
+        {
+            StartIpAddress = "0.0.0.0",
+            EndIpAddress = "255.255.255.255",
+            ServerName = mysql.Name,
+            FirewallRuleName = "allowall",
+            ResourceGroupName = rg.Name
+        });
+
         var mysqlopts = new CustomResourceOptions()
         {
             Provider = new Pulumi.MySql.Provider("mysql", new()
@@ -84,6 +93,10 @@ class AzMysqlDemo : Stack
         {
             UserName = "user",
             PlaintextPassword = pw.Result
-        }, mysqlopts);
+        }, new ()
+        {
+            Provider = mysqlopts.Provider,
+            DependsOn = db
+        });
     }
 }
