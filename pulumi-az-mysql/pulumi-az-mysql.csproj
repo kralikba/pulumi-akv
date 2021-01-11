@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>pulumi_az_mysql</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Pulumi.AzureNextGen" Version="0.4.0" />
+      <PackageReference Include="Pulumi.MySql" Version="2.3.2" />
+      <PackageReference Include="Pulumi.Random" Version="3.0.0" />
+    </ItemGroup>
+
+</Project>
