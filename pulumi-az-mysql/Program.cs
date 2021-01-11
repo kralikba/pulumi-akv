@@ -78,7 +78,7 @@ class AzMysqlDemo : Stack
             Provider = new Pulumi.MySql.Provider("mysql", new()
             {
                 Endpoint = mysql.FullyQualifiedDomainName.Apply(s => $"{s}:3306"),
-                Username = mysql.AdministratorLogin,
+                Username = Output.Tuple(mysql.AdministratorLogin, mysqlname.Result).Apply(t => $"{t.Item1}@{t.Item2}"),
                 Password = pw.Result,
                 Tls = "skip-verify"
             })
@@ -89,7 +89,7 @@ class AzMysqlDemo : Stack
             Name = "db"
         }, mysqlopts);
 
-        var user = new Pulumi.MySql.User("user", new()
+       var user = new Pulumi.MySql.User("user", new()
         {
             UserName = "user",
             PlaintextPassword = pw.Result
