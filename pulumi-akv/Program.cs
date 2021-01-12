@@ -67,7 +67,7 @@ class AkvDemoStack : Stack
             Properties = new KeyPropertiesArgs()
             {
                 KeySize = 2048,
-                Kty = "RS",
+                Kty = JsonWebKeyType.RSA,
                 KeyOps =
                 {
                     JsonWebKeyOperation.WrapKey,
